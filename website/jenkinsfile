@@ -1,0 +1,10 @@
+pipeline {
+    agent { docker { image 'nyanlynn99/assignment:second' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'php --version'
+            }
+        }
+    }
+}
