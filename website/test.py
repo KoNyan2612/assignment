@@ -7,13 +7,13 @@ import time
 driver = webdriver.Firefox(
     executable_path="/home/samson/Downloads/geckodriver")
 
-driver.get("http://127.0.0.1:1200")
+driver.get("http://172.17.0.2")
 print(driver.title)
 
 search = driver.find_element_by_id("About Us")
 search.send_keys(Keys.RETURN)
 
-driver.get("http://127.0.0.1:1200/content/about-us.php")
+driver.get("http://172.17.0.2/content/about-us.php")
 
 about = driver.find_element_by_id("PID-ab2-pg")
 i = "This is about page."
