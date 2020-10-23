@@ -1,9 +1,25 @@
 pipeline {
-    agent master
+    agent none
     stages {
-        stage('copy ssh id') {
+        agent {
+            label 'node-1'
+        }
+        stage('build docker') {
             steps {
-                sh 'ssh-copy-id node-1'
+                sh '''
+                cd website
+                docker build -t php-webapp:latest .
+                '''
+            }
+        }
+        stage('run docker') {
+            steps {
+                sh 'docker run -d php-webapp:latest'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'python3 website/test.py'
             }
         }
     }
