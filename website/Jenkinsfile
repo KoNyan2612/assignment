@@ -18,7 +18,10 @@ pipeline {
                 label 'node-1'
             }
             steps {
-                sh 'python3 website/test.py'
+                sh '''
+                chmod 666 /home/samson/Downloads/geckodriver
+                python3 website/test.py
+                '''
             }
         }
     }
