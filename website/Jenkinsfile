@@ -1,9 +1,9 @@
 pipeline {
-    agent { docker { image 'nyanlynn99/assignment:second' } }
+    agent master
     stages {
-        stage('build') {
+        stage('copy ssh id') {
             steps {
-                sh 'php --version'
+                sh 'ssh-copy-id node-1'
             }
         }
     }
