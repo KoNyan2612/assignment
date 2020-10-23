@@ -1,23 +1,22 @@
 pipeline {
     agent none
     stages {
-        agent {
-            label 'node-1'
-        }
-        stage('build docker') {
+        stage('build and run docker in test-server') {
+            agent {
+                label 'node-1'
+            }
             steps {
                 sh '''
                 cd website
                 docker build -t php-webapp:latest .
+                docker run -d php-webapp:latest
                 '''
             }
         }
-        stage('run docker') {
-            steps {
-                sh 'docker run -d php-webapp:latest'
+        stage('test in test-server') {
+            agent {
+                label 'node-1'
             }
-        }
-        stage('test') {
             steps {
                 sh 'python3 website/test.py'
             }
